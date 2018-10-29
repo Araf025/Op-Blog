@@ -1,0 +1,92 @@
+﻿@model Blog1.Models.Blog
+
+@{
+    ViewBag.Title = "Create";
+}
+<div class="col-md-1"></div>
+
+<div class="col-md-11" style="padding:70px">
+    <h2>Create</h2>
+
+    @using (Html.BeginForm("Create", "Blog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Blog</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Content, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ThumbnailImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" id="file" name="file" />
+                </div>
+            </div>
+            <div class="form-group">
+                @using Blog1.Models
+
+                @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Category,
+                        new SelectList(Enum.GetValues(typeof(category))),
+                        "Select Category")
+                        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 text-success">
+                    @ViewBag.FileStatus
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Post!" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <script>
+        function validate(element) {
+            var image_file = element.value;
+            var allowed_extensions = new Array("jpg", "png", "gif");
+
+            var file_extension = image_file.split('.').pop(); // split function will split the filename by dot(.), and pop function will pop the last element from the array which will give you the extension as well. If there will be no extension then it will return the filename.
+            if (image_file == "") return true;
+            for (var i = 0; i <= allowed_extensions.length; i++) {
+                if (allowed_extensions[i] == file_extension) {
+                    return true; // valid file extension
+                }
+            }
+            element.value = "";
+            alert("You must upload image file");
+            return false;
+        }
+
+    </script>
+
+
+
+</div>

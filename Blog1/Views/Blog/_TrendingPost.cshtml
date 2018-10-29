@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Blog1.Models.Blog>
+
+
+<div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10">
+
+        <h1>Trending</h1>
+
+        <hr />
+
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="blog-container">
+                    <div style="padding:5px">
+
+                        <img src="@item.ThumbnailImageUrl" class="img-responsive" alt="Cover">
+                        <div>
+                            <h2>
+                                @Html.ActionLink(@item.Title, "Details", new { id = item.BlogId })
+
+                            </h2>
+                            By @Html.ActionLink(@item.Author.ToString(), "BrowseAuthor", new { id1 = item.Author })
+                            <br />@Html.DisplayFor(modelItem => item.Content)
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+        }
+    </div>
+    <div class="col-md-1">
+
+    </div>
+</div>

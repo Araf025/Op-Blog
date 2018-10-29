@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Blog1.Models.Blog>
+
+<div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10">
+
+        <h1>Trending</h1>
+
+        <hr />
+
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="blog-container button2">
+                    <div style="padding:5px">
+
+                        <img src="@item.ThumbnailImageUrl" class="img-responsive" alt="Cover">
+                        <div>
+                            <h2>
+                                @Html.ActionLink(@item.Title, "Details", new { id = item.BlogId })
+
+                            </h2>
+                            By @Html.ActionLink(@item.Author.ToString(), "BrowseAuthor", new { id1 = item.Author })
+                            <br />@Html.DisplayFor(modelItem => item.Content)
+                            <div class="row">
+                                <div class="col-md-6" style="text-align:left">
+                                    <a><i class="fa fa-heart" aria-hidden="true"></i> @Html.DisplayFor(modelItem => item.BlogLikes.Count)</a>
+                                </div>
+
+                                <div class="col-md-6" style="text-align:right">
+                                    <a><i class="fa fa-comments" aria-hidden="true"></i> @Html.DisplayFor(modelItem => item.BlogComments.Count)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+        }
+    </div>
+    <div class="col-md-1">
+
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "ShowComment";
+}
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-7">
+    <h2>Comments On This Post</h2>
+</div>
+    <div class="col-md-4"></div>
+</div>
+@model IEnumerable<Blog1.Models.BlogComment>
+
+<style>
+    .blog-container {
+        background: white;
+    }
+
+        .blog-container img {
+            width: 100%;
+        }
+
+        .blog-container div {
+            padding: 10px;
+        }
+
+    .box {
+        background-color: rosybrown;
+        height: 60%;
+        width: 60%;
+        left: 20%;
+        top: 20%;
+    }
+
+    .b {
+        color: white;
+    }
+</style>
+
+<div class="row">
+
+    <div class="col-md-1"></div>
+    <div class="col-md-7" style="padding:30px">
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="blog-container">
+                    <div>
+
+                        @Html.DisplayFor(modelItem => item.Comment)
+
+                        <br /><a href="#">@Html.DisplayFor(modelItem => item.CommentAuthor)</a>
+                        <br />@Html.DisplayFor(modelItem => item.DateCreated)
+                        <hr />
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+
+
+
+</div>
+

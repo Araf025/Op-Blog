@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Browse";
+}
+
+@model IEnumerable<Blog1.Models.Blog>
+
+<style>
+    .blog-container {
+        background: #EFF0F1;
+        /*//rgb(236, 238, 213);*/
+    }
+
+        .blog-container img {
+            width: 100%;
+        }
+
+        .blog-container div {
+            padding: 10px;
+        }
+
+    .box {
+        background-color: rosybrown;
+        height: 60%;
+        width: 60%;
+        left: 20%;
+        top: 20%;
+    }
+
+    .b {
+        color: white;
+    }
+    .button2:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+        <hr />
+
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="blog-container button2">
+
+                    <div style="padding:10px">
+                        <img src="@item.ThumbnailImageUrl" class="img-responsive" alt="Cover">
+                        <div>
+                            <h2>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </h2>
+                            By
+                            @Html.ActionLink(@item.Author.ToString(), "BrowseAuthor", new { id1 = item.Author })
+
+                            <br /> Category : @Html.ActionLink(@item.Category.ToString(), "CategorizedBrowse", new { id = item.Category })
+                            <br />@Html.DisplayFor(modelItem => item.Content)
+                            <br />@Html.ActionLink("read more...", "Details", new { id = item.BlogId })
+
+                            <br />@Html.ActionLink("Approve", "Approve", new { id = item.BlogId }, new { @class = " btn btn-success  " })
+
+                                @Html.ActionLink("Delete", "Delete", new { id = item.BlogId }, new { @class = " btn btn-danger  " })
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+        }
+    </div>
+    <div class="col-md-4"></div>
+</div>
